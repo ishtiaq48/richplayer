@@ -487,7 +487,7 @@ const views = {
         ${L.tracks.length ? `<button class="circle-btn" data-action="sort">${icon('i-sort')}</button>` : ''}
         <button class="circle-btn" data-action="import">${icon('i-plus')}</button></div>
       <h1>Library</h1>
-      ${isIOS && !installed ? `<div class="banner"><div><b>Install RichPlayer:</b> tap <b>Share</b> › <b>Add to Home Screen</b>. Install first, then import — Safari and the Home Screen app keep separate libraries.</div></div>` : ''}
+      ${isIOS && !installed ? `<div class="banner"><div><b>Install RichPlayer (open in Safari):</b><br>1. Tap <b>•••</b> next to the address bar › <b>Share</b><br>2. Scroll up or tap <b>View More</b> › <b>Add to Home Screen</b> › <b>Add</b><br>Install first, then import songs from the Home Screen icon — Safari and the Home Screen app keep separate libraries.</div></div>` : ''}
       ${L.tracks.length ? `<label class="search">${icon('i-search')}<input id="q" type="search" placeholder="Songs, artists, albums" value="${esc(UI.q)}" autocomplete="off"></label>` : ''}
       ${L.tracks.length && !UI.q && !UI.selecting ? `<div class="cards">${Object.entries(smart).map(([k, s]) => `<button class="card" data-action="open-smart" data-key="${k}">
         <span style="color:${s.color}">${icon(s.icon)}</span><div class="t1">${s.name}</div><div class="t2">${plural(s.get().length, 'song')}</div></button>`).join('')}</div>
