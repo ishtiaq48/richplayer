@@ -1,5 +1,5 @@
 // Offline cache for the app shell. Bump VERSION whenever any file changes.
-const VERSION = 'rp-web-2';
+const VERSION = 'rp-web-3';
 const SHELL = ['./', 'index.html', 'styles.css', 'app.js', 'tags.js', 'manifest.webmanifest',
   'icons/apple-touch-icon.png', 'icons/icon-192.png', 'icons/icon-512.png'];
 

@@ -270,10 +270,17 @@ const Player = {
     const token = ++this.loadToken;
     this.index = i;
     this.pendingResume = null;
-    const t = this.current;
-    const blob = await DB.get('files', t.id);
+    const id = this.queue[i], t = T(id);
+    const blob = t && await DB.get('files', id);
     if (token !== this.loadToken) return;
-    if (!blob) { toast(`Missing file: ${t.title}`); return this.next(true); }
+    if (!blob) {
+      // Drop the missing song from the queue so a queue of missing files can't loop forever.
+      toast(`Missing file: ${t ? t.title : 'song removed'}`);
+      this.queue.splice(i, 1); this.orig = this.orig.filter((x) => x !== id);
+      if (!this.queue.length) return this.close();
+      if (i < this.queue.length) return this.load(i, autoplay);
+      this.index = this.queue.length - 1; this.persist(); return updateNow();
+    }
     if (curURL) URL.revokeObjectURL(curURL);
     curURL = URL.createObjectURL(blob);
     audio.src = curURL;
